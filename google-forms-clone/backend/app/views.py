@@ -31,11 +31,14 @@ def user_login(request):
         data = json.loads(request.body)
         username = data.get('username')
         password = data.get('password')
+        print(f"Attempting login for username: {username}")  # Debug logging
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            print(f"Login successful for user: {username}")  # Debug logging
             return JsonResponse({'message': 'Login successful'}, status=200)
         else:
+            print(f"Login failed for username: {username}")  # Debug logging
             return JsonResponse({'error': 'Invalid credentials'}, status=401)
     return JsonResponse({'error': 'Method not allowed'}, status=405)
 

@@ -98,6 +98,38 @@ async function getFormResponses(formId, token) {
   return response.json();
 }
 
+async function getForm(formId, token) {
+  const response = await fetch(`${API_BASE_URL}/forms/${formId}/`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch form');
+  }
+
+  return response.json();
+}
+
+async function updateForm(formId, formDetails, token) {
+  const response = await fetch(`${API_BASE_URL}/forms/${formId}/`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(formDetails),
+  });
+
+  if (!response.ok) {
+    throw new Error('Form update failed');
+  }
+
+  return response.json();
+}
+
 export {
   registerUser,
   loginUser,
@@ -105,4 +137,6 @@ export {
   submitResponse,
   getForms,
   getFormResponses,
+  getForm,
+  updateForm
 };

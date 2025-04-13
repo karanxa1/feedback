@@ -1,4 +1,3 @@
-javascriptreact
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getForms } from '../services/api'; // Assuming you have a service for API calls
